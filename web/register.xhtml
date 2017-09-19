@@ -5,19 +5,33 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Registering registry in the register</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+        <link href="register.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <f:view>
         <h:form>
             <h:body>
-                <h:outputLabel value="Username:"/>
-                <h:inputText value="#{userView.user.name}"/>
-                <br/>
+                <h:link outcome="index">
+                    <button type="button" class="btn btn-lg btn-primary">Home</button>
+                </h:link>
                 
-                <h:outputLabel value="Password"/>
-                <h:inputText value="#{userView.user.password}"/>
-                <br/>
-                
-                <h:commandButton action="#{userView.postUser}" value="Register"/>
+                <div class="signupForm">
+                <div class = "inputField">
+                    <h:outputLabel class="textLabel" value="Username:"/>
+                    <h:inputText class="field" value="#{userView.user.name}"/>
+                </div>
+                    
+                <div class = "inputField">
+                    <h:outputLabel class="textLabel" value="Password:"/>
+                    <h:inputText class="field" value="#{userView.user.password}"/>
+                </div>
+
+                <div class = "inputField">
+                    <h:outputLabel class="textLabel" value="Repeat Password:"/>
+                    <h:inputText class="field" value="#{userView.user.password}"/>
+                </div>
+                    <h:commandButton action="#{userView.postUser}" class="btn btn-lg btn-success" value="Register"/>
+                </div>
             </h:body>
         </h:form>
     </f:view>

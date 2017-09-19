@@ -11,6 +11,10 @@
   <h:body>
     <f:view>
         <h:form>
+            <h:link outcome="index">
+                <button type="button" class="btn btn-lg btn-primary">Home</button>
+            </h:link>
+            <br/>
             <h:outputLabel value="ProductName:"/><h:inputText value="#{productView.product.name}"/>
             <h:commandButton action="#{productView.postProduct}" value="Post Product"/>
             <br/>
