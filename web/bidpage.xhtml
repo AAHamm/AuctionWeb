@@ -30,20 +30,14 @@
             Sold By:
             <h:outputText  value="#{productView.productSeller}"/>
         </div>
-        <div class="smallerForm">
-        <h:outputText  value="#{productView.productName}"/> 
-        <br/>
-        <br/>
-        <h:outputText  value="#{productView.productDescription}"/>
-        <br/>
-        <br/>
-            Currently at:
-            <h:outputText value="#{productView.productPrice}"/>
-            kr
-            <br/>
-            Sold By:
-            <h:outputText  value="#{productView.productSeller}"/>
+        <div class = "inputField">
+            <h:outputLabel class="textLabel" value="make Bid:"/>
+            <h:inputText class="field" value="#{ProductView.bidVal}"/>
         </div>
+        </div>
+            <h:commandButton action="#{ProductView.makeBid}" class="btn btn-lg btn-success" value="Register"/>
+        </div>
+
     </div>
 </h:body>
 </html>

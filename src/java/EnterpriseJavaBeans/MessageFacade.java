@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package boundary;
+package EnterpriseJavaBeans;
 
-import entities.AuctionUser;
+import Entities.Message;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author raugz
+ * @author Gard
  */
 @Stateless
-public class UserFacade extends AbstractFacade<AuctionUser> {
+public class MessageFacade extends AbstractFacade<Message> {
 
     @PersistenceContext(unitName = "persistence unit")
     private EntityManager em;
@@ -25,14 +25,14 @@ public class UserFacade extends AbstractFacade<AuctionUser> {
         return em;
     }
 
-    public UserFacade() {
-        super(AuctionUser.class);
+    public MessageFacade() {
+        super(Message.class);
     }
     
-    public String printUserNames(){
-    String out ="";
-    for(AuctionUser a : findAll()){
-           out += a.getName()+ "; ";
+    public String printMessages(){
+       String out ="";
+       for(Message a : findAll()){
+           out += a.getMessage() + "; ";
        }
        return out;
     }

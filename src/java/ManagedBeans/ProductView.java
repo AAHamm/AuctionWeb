@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package my.presentation;
+package ManagedBeans;
 
-import boundary.ProductFacade;
-import entities.Product;
+import EnterpriseJavaBeans.ProductFacade;
+
+import Entities.Product;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -24,6 +25,8 @@ public class ProductView {
     private ProductFacade productFacade;
     private Product product;
 
+    private double bidVal = -1;
+
     public void setProduct(Product product) {
         this.product = product;
     }
@@ -40,15 +43,29 @@ public class ProductView {
     }
     
     public String postProduct(){
-        this.productFacade.create(product);
+        this.productFacade.create(product);  
+
         return "mainpage";
     }
 
     public Product getProduct() {
         return product;
     }
-    
-        public String getAllProducts(){
+    public String getAllProducts(){
         return productFacade.printProductNames();
     }
+        
+    public String getProductName(){
+        return productFacade.printProductName(0);
+    }
+    public String getProductDescription(){
+        return productFacade.printDescription(0);
+    }
+    public String getProductPrice(){
+        return productFacade.printPrice(0);
+    }
+    public String getProductSeller(){
+        return productFacade.printSeller(0);
+    }
+
 }

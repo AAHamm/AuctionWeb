@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>User #{userView.thisUser}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+        <link href="navBar.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <f:view>             
+            <h:form>
+                <div class="navbar">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.xhtml">Home</a>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link active" href="userPage.xhtml">Profile</a>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link active" href="registerproduct.xhtml">Register Product</a>
+                            </li>
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0">
+                            <div class="searchbarLimits">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search"></input>
+                            </div>
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            
+                        </form>
+                    </nav>
+                </div>
+
+                <div class="media">
+                    <img class="d-flex mr-3" data-src="holder.js/64x64" alt="64x64" style="width: 160px; height: 160px;" src="https://i.redd.it/omdxvq5q4khz.jpg" data-holder-rendered="true"></img>
+                    <div class="media-body">
+                        <h5 class="mt-0">#{userView.thisUser}
+                        </h5>
+                        DOTHRAKI HORDES IN AN OPEN FIELD, NED!
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        1 of 2
+                        <br/>
+                        TODO
+                        Products or somesuch
+                    </div>
+                    <div class="col">
+                        2 of 2
+                        <br/>
+                        Ratings TODO
+                    </div>
+                </div>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>

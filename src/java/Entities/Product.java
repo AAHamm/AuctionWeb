@@ -3,13 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package Entities;
 
 import java.io.Serializable;
+
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+
 
 /**
  *
@@ -20,14 +30,49 @@ public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;  
+    
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="SELLER_ID")
+    private AuctionUser seller;
+    //private String seller;
+    
     private String name;
-    private String seller;
-    private String currentBuyer;
     private String description;
     private String shipsTo;
-    private double currentPrice;
+    private double startingPrice;
+    @OneToOne(mappedBy="product", cascade = CascadeType.PERSIST)
+    private Bid currentBid;
+
+    public double getStartingPrice() {
+        return startingPrice;
+    }
+
+    public void setStartingPrice(double startingPrice) {
+        this.startingPrice = startingPrice;
+    }
+
+    public Bid getCurrentBid() {
+        return currentBid;
+    }
+
+    public void setCurrentBid(Bid currentBid) {
+        this.currentBid = currentBid;
+
+    }
+
+    
+    
+
+    
+    public AuctionUser getSeller() {
+        return seller;
+    }
+    
+    public void setSeller(AuctionUser s) {
+        this.seller = s;
+    }
 
     public String getShipsTo() {
         return shipsTo;
@@ -47,32 +92,7 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    
-    
-    public double getCurrentPrice() {
-        return currentPrice;
-    }
-
-    public void setCurrentPrice(double currentPrice) {
-        this.currentPrice = currentPrice;
-    }
-    
-
-    public String getSeller() {
-        return seller;
-    }
-
-    public void setSeller(String seller) {
-        this.seller = seller;
-    }
-
-    public String getCurrentBuyer() {
-        return currentBuyer;
-    }
-
-    public void setCurrentBuyer(String currentBuyer) {
-        this.currentBuyer = currentBuyer;
-    }
+ 
 
     public String getName() {
         return name;

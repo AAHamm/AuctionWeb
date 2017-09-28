@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+        <link href="product.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+
+    <f:view>
+        <h:form>
+            <h:body>
+                <div class="productDisplay">
+                    <div class="leftDiv">
+
+                        <div class="image">
+                            <img src="http://media.mmo-champion.com/images/news/2017/september/piratesDay.jpg"
+                                 style="width: 100%; height: 100%"/>
+                        </div>
+                        <div class="currentBid">
+                            <h:outputLabel class="textLabel" value="PHCurrentBid"/>
+                        </div>
+                    </div>
+                    <div class="rightDiv">
+                        <div class="title">
+                            <h:outputLabel class="textLabel" value="PHTitle"/>
+                        </div>
+                        <div class="description">
+                            <h:outputLabel class="textLabel" value="PHDescription"/>
+                        </div>
+
+
+                        <div class="newBid">
+                            <h:inputText class="" a:placeholder="" value="New bid"/>
+                        </div>
+
+
+                        <div class="submit">
+                            <h:commandButton class="btn btn-lg btn-success" value="Submit"/>
+                        </div>
+                    </div>
+                    <div class="botDiv">
+
+                        <div class="comments">
+                            <h:outputLabel class="textLabel" value="PHComments/historybids"/>
+                        </div>
+                    </div>
+                </div>
+            </h:body>
+        </h:form>
+    </f:view>
+
+</html>
+

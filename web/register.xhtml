@@ -14,6 +14,11 @@
                 <h:link outcome="index">
                     <button type="button" class="btn btn-lg btn-primary">Home</button>
                 </h:link>
+                <br/>
+                <h:outputLabel class="textLabel" value="#{loginClient.user.name}"/>
+                <h:outputLabel class="textLabel" value="#{loginClient.user.password}"/>
+                
+                <br/>
                 
                 <div class="signupForm">
                 <div class = "inputField">
@@ -23,12 +28,13 @@
                     
                 <div class = "inputField">
                     <h:outputLabel class="textLabel" value="Password:"/>
-                    <h:inputText class="field" value="#{userView.user.password}"/>
+                    <h:inputSecret class="field" value="#{userView.user.password}"/>
+                 
                 </div>
 
                 <div class = "inputField">
                     <h:outputLabel class="textLabel" value="Repeat Password:"/>
-                    <h:inputText class="field" value="#{userView.user.password}"/>
+                    <h:inputSecret class="field" value="#{userView.user.password}"/>
                 </div>
                     <h:commandButton action="#{userView.postUser}" class="btn btn-lg btn-success" value="Register"/>
                 </div>

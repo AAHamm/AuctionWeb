@@ -7,14 +7,13 @@
         <title>Facelet Title</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
     </h:head>
+
   <h:body>
     <f:view>
         <h:form>
             <h:outputLabel value="ProductName:"/><br/><h:inputText value="#{productView.product.name}"/>
             <br/>
-            <h:outputLabel value="SellerName:"/><br/><h:inputText value="#{productView.product.seller}"/>
-            <br/>
-            <h:outputLabel value="Base Price:"/><br/><h:inputText value="#{productView.product.currentPrice}"/>
+            <h:outputLabel value="Base Price:"/><br/><h:inputText value="#{productView.product.startingPrice}"/>
             <br/>
             <h:outputLabel value="Ships to: "/><br/><h:inputText value="#{productView.product.shipsTo}"/>
             <br/>
@@ -23,10 +22,9 @@
             <br/>
             <br/>
             <br/>
-            <h:link outcome="index">
-                    <button type="button" class="btn btn-lg btn-primary">Home</button>
-            </h:link>
-        </h:form>
-    </f:view>
-</h:body>
+            <h:link outcome="index"/>
+              
+              </h:form>
+        </f:view>
+    </h:body>
 </html>

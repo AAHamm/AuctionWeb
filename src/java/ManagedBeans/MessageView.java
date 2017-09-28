@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package my.presentation;
+package ManagedBeans;
 
-import boundary.MessageFacade;
-import entities.Message;
+
+import EnterpriseJavaBeans.MessageFacade;
+
+import Entities.Message;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;

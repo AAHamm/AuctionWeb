@@ -3,13 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package Entities;
 
 import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+
 
 /**
  *
@@ -20,10 +32,51 @@ public class AuctionUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String password;
+        
+    @OneToMany(mappedBy="seller", cascade = CascadeType.PERSIST)
+    /*@JoinTable
+    (
+      name="USR_PRODUCTS",
+      joinColumns={ @JoinColumn(name="ID", referencedColumnName="ID") },
+      inverseJoinColumns={ @JoinColumn(name="PROD_ID", referencedColumnName="ID", unique=false) }
+    )*/
+    private List<Product> products = new ArrayList();
+    
+    @OneToMany(mappedBy="buyer", cascade = CascadeType.PERSIST)
+    private List<Bid> bids = new ArrayList();
+
+    public AuctionUser() {
+    }
+
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
+
+    
+    
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+    
+    public List<Product> getProducts() {
+        return products;
+    }
+    
+    public void addProduct(Product p){
+        this.products.add(p);
+        if (p.getSeller() != this) {
+            p.setSeller(this);
+        }
+    }
 
     public String getPassword() {
         return password;
