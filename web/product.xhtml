@@ -44,6 +44,8 @@
                                                 <input a:placeholder="" type="number" name="amount"/>
                                                 <input type="submit" class="btn btn-primary btn-success" value="Make bid"/>
                                             </form>
+                                            <h:outputLabel class="textLabel" value="${loginBidError}"/>
+                                            <br/>
                                             Auction Ends at:
                                             <h:outputLabel class="textLabel" value="${selectedProduct.expirationDate}"/>
                                         </div>

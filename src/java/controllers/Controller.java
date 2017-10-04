@@ -16,6 +16,7 @@ import ManagedBeans.ProductView;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.Enumeration;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.SessionBean;
@@ -187,8 +188,9 @@ public class Controller extends HttpServlet {
 
             //only logged on users can make Bids
             if (session.getAttribute("user") == null) {
-                response.sendError(401);
-                return;
+                String error = "You need to be logged in order to bid for items.";
+                session.setAttribute("loginBidError", error);
+                response.sendRedirect("/AuctionWeb/faces/product.xhtml");
             }
 
             double amount = Double.parseDouble(request.getParameter("amount"));
@@ -232,10 +234,11 @@ public class Controller extends HttpServlet {
                 
                 String welcome = "Hello " + u.getName();
 
+                flushSession(session);
                 session.setAttribute("user", u);
                 session.setAttribute("welcomeMessage", welcome);
-                session.removeAttribute("isNotLoggedInError");
-                session.removeAttribute("loginStatusMessage");
+                //session.removeAttribute("isNotLoggedInError");
+                //session.removeAttribute("loginStatusMessage");
 
                 try {
                     response.sendRedirect("/AuctionWeb");
@@ -299,4 +302,12 @@ public class Controller extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void flushSession(HttpSession session){
+        Enumeration<String> allAttributes = session.getAttributeNames();
+        
+        while(allAttributes.hasMoreElements()){
+            session.removeAttribute(allAttributes.nextElement());
+        }
+    }
+    
 }
