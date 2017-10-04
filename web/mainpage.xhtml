@@ -8,32 +8,48 @@
     <h:head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
         <link href="register.css" rel="stylesheet" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Facelet Title</title>
     </h:head>
     <ui:include src="/navBar.xhtml" />   
     <h:body>
-        TODO CSS
-    <br/>
-        <ui:repeat value="#{productView.allSorted}" var="product">
-            <tr>
-                <td>
-                    <h:outputLabel class="textLabel" value="#{product.name}"/>
-                </td>
-                <td>
-                    <h:outputLabel class="textLabel" value="#{product.shipsTo}"/>
-                </td>
-                <td>
-                    <h:outputLabel class="textLabel" value="#{product.startingPrice}"/>
-                </td>
-                <th>
-                    <form action="search" method="get">
-                        <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
-                        </button>   
-                    </form>
+        <br/>
+        <f:view>
+            <div class="container">
+                <h2>Catalog:</h2>
 
-                </th>
-            </tr>
-        </ui:repeat>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Ships to</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ui:repeat value="#{productView.allSorted}" var="product">
+                            <tr>
+                                <td>
+                                    <h:outputLabel class="textLabel" value="#{product.name}"/>
+                                </td>
+                                <td>
+                                    <h:outputLabel class="textLabel" value="#{product.shipsTo}"/>
+                                </td>
+                                <td>
+                                    <h:outputLabel class="textLabel" value="#{product.startingPrice}"/>
+                                </td>
+                                <th>
+                                    <form action="search" method="get">
+                                        <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
+                                        </button>   
+                                    </form>
 
+                                </th>
+                            </tr>
+                        </ui:repeat>
+                    </tbody>
+                </table>
+            </div>
+        </f:view>
     </h:body>
 </html>
