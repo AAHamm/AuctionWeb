@@ -208,6 +208,16 @@ public class Controller extends HttpServlet {
                     productFacade.merge(product);
                     userFacade.merge((AuctionUser) session.getAttribute("user"));
                 }
+                else { // bid was not created
+                    String error;
+                    if (product.getIsExpired()) {
+                        error = "The item has expired, bidding is disabled";
+                    } else {
+                        error = "Someting went wrong, please refresh page";
+                    }
+                    session.setAttribute("bidCreationError", error);
+                    response.sendRedirect("/AuctionWeb/faces/product.xhtml");
+                }
 
             }
 

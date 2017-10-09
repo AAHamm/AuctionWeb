@@ -52,6 +52,15 @@ public class Product implements Serializable, Comparable<Product> {
     private List<Bid> bids = new ArrayList<Bid>();
     private boolean isPublished;
     private Date expirationDate;
+    private Boolean isExpired = false;
+
+    public Boolean getIsExpired() {
+        return isExpired;
+    }
+
+    public void setIsExpired(Boolean isExpired) {
+        this.isExpired = isExpired;
+    }
 
     public boolean isIsPublished() {
         return isPublished;
