@@ -9,6 +9,7 @@ import EnterpriseJavaBeans.AbstractFacade;
 import Entities.AuctionUser;
 import Entities.Bid;
 import Entities.Product;
+import Enums.Category;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,7 +64,7 @@ public class ProductFacade extends AbstractFacade<Product> {
      * Creates a product and adds it to the database
      * Handles conversion from Strings to userful objects.
      */
-    public Product createProduct(String name, String startingPrice, String shipsTo,
+    public Product createProduct(String name, String startingPrice, Category cat, String shipsTo,
                                  String description, String imageURL, String date, String isPublished,
                                  AuctionUser seller){
         
@@ -72,6 +73,7 @@ public class ProductFacade extends AbstractFacade<Product> {
             p.setDescription(description);
             p.setImageURL(imageURL);
             p.setName(name);
+            p.setCategory(cat);
             p.setShipsTo(shipsTo);
             
             if(isPublished == null)
