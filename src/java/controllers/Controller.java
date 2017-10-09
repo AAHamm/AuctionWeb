@@ -12,6 +12,7 @@ import EnterpriseJavaBeans.UserFacade;
 import Entities.AuctionUser;
 import Entities.Bid;
 import Entities.Product;
+import Enums.Category;
 import ManagedBeans.ProductView;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -173,6 +174,7 @@ public class Controller extends HttpServlet {
             String description = request.getParameter("description");
             String imageURL = request.getParameter("imageURL");
             String date = request.getParameter("expirationDate");
+            //Category category = request.getParameter("Category");
             String isPublished = request.getParameter("isPublished");
 
             Product p

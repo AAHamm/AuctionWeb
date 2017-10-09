@@ -5,6 +5,7 @@
  */
 package Entities;
 
+import Enums.Category;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -53,6 +54,15 @@ public class Product implements Serializable, Comparable<Product> {
     private boolean isPublished;
     private Date expirationDate;
     private Boolean isExpired = false;
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public Boolean getIsExpired() {
         return isExpired;
