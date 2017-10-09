@@ -12,6 +12,7 @@ import EnterpriseJavaBeans.UserFacade;
 import Entities.AuctionUser;
 import Entities.Bid;
 import Entities.Product;
+import Enums.Category;
 import ManagedBeans.ProductView;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -175,8 +176,11 @@ public class Controller extends HttpServlet {
             String date = request.getParameter("expirationDate");
             String isPublished = request.getParameter("isPublished");
 
+            String cat = request.getParameter("category");
+            Category category = Category.valueOf(cat);
+
             Product p
-                    = productFacade.createProduct(name, startingPrice, shipsTo,
+                    = productFacade.createProduct(name, startingPrice, category, shipsTo,
                             description, imageURL, date, isPublished,
                             (AuctionUser) session.getAttribute("user"));
 
@@ -207,6 +211,16 @@ public class Controller extends HttpServlet {
                 if(b != null){
                     productFacade.merge(product);
                     userFacade.merge((AuctionUser) session.getAttribute("user"));
+                }
+                else { // bid was not created
+                    String error;
+                    if (product.getIsExpired()) {
+                        error = "The item has expired, bidding is disabled";
+                    } else {
+                        error = "Someting went wrong, please refresh page";
+                    }
+                    session.setAttribute("bidCreationError", error);
+                    response.sendRedirect("/AuctionWeb/faces/product.xhtml");
                 }
 
             }

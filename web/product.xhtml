@@ -45,6 +45,7 @@
                                                 <input type="submit" class="btn btn-primary btn-success" value="Make bid"/>
                                             </form>
                                             <h:outputLabel class="textLabel" value="${loginBidError}"/>
+                                            <h:outputLabel class="textLabel" value="${bidCreationError}"/>
                                             <br/>
                                             Auction Ends at:
                                             <h:outputLabel class="textLabel" value="${selectedProduct.expirationDate}"/>
@@ -56,6 +57,8 @@
                                             Sold by:
                                             <h:outputLabel class="textLabel" value="${selectedProduct.seller.name}"/>
                                         </div>
+                                        <br/>
+                                        <h:outputLabel class="textLabel" value="${selectedProduct.category}"/>
                                     </div>                           
                                 </div>
                             </div>                 
