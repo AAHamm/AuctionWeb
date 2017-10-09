@@ -73,7 +73,7 @@ public class BidFacade extends AbstractFacade<Bid> {
         }
         
         try{
-            em.lock(product, LockModeType.PESSIMISTIC_FORCE_INCREMENT);
+         //   em.lock(product, LockModeType.PESSIMISTIC_FORCE_INCREMENT);
             product.setStartingPrice(amount);
         }
         catch(PessimisticLockException e){

@@ -70,36 +70,93 @@
                                     </form> 
                                 </div>
                             </div>
-
-
                         </div>
 
                     </div>
                 </div>
+                <div class="container-table">
+                 
+                        <div class="col-md-12" style="margin-top: 50px;">
+                              <div class="row">
+                            <div class="col-md-6" align="center">
+                                <h4>User's Products:</h4>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Ships to</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ui:repeat value="#{user.products}" var="product">
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel class="textLabel" value="#{product.name}"/>
+                                                </td>
+                                                <td>
+                                                    <h:outputLabel class="textLabel" value="#{product.shipsTo}"/>
+                                                </td>
+                                                <td>
+                                                    <h:outputLabel class="textLabel" value="#{product.startingPrice}"/>
+                                                </td>
+                                                <th>
+                                                    <form action="search" method="get">
+                                                        <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
+                                                        </button>   
+                                                    </form>
 
-                <ui:repeat value="#{user.products}" var="product">
-                    <tr>
-                        <td>
-                            <h:outputLabel class="textLabel" value="#{product.name}"/>
+                                                </th>
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                        </td>
-                        <td>
-                            <h:outputLabel class="textLabel" value="#{product.shipsTo}"/>
-                        </td>
-                        <td>
-                            <h:outputLabel class="textLabel" value="#{product.startingPrice}"/>
-                        </td>
-                        <th>
-                            <form action="search" method="get">
-                                <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
-                                </button>   
-                            </form>
 
-                        </th>
-                    </tr>
-                </ui:repeat>
+                            <div class="col-md-6" align="center">
+                                <h4>User's Bids:</h4>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Ships to</th>
+                                            <th>Price</th>
+                                            <th>Highest bider</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ui:repeat value="#{user.bids}" var="bid">
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel class="textLabel" value="#{bid.product.name}"/>
+                                                </td>
+                                                <td>
+                                                    <h:outputLabel class="textLabel" value="#{bid.product.shipsTo}"/>
+                                                </td>
+                                                <td>
+                                                    <h:outputLabel class="textLabel" value="#{bid.product.startingPrice}"/>
+                                                </td>
+                                                  <td>
+                                                    <h:outputLabel class="textLabel" value="#{bid.buyer.name}"/>
+                                                </td>
+                                                
+                                                <th>
+                                                    <form action="search" method="get">
+                                                        <button type="submit" class="btn btn-primary " value="#{bid.product.id}" name="productID" >Go To!
+                                                        </button>   
+                                                    </form>
+
+                                                </th>
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </h:body>
     </f:view>
 </html>
