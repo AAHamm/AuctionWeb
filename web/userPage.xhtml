@@ -7,56 +7,99 @@
 
     <h:head>
         <title>${user.name}</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+        <link href="userPage.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" 
+              integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
     </h:head>
-    <ui:include src="/navBar.xhtml" />   
-    <h:body>
-        <f:view>             
-            <div class="media">
-                <img class="d-flex mr-3" data-src="holder.js/64x64" alt="64x64" style="width: 160px; height: 160px;" src="${user.pic}" data-holder-rendered="true"></img>
-                <div class="media-body"> 
-                    <h3> ${user.name}  </h3>
-                    <br/> 
-                    <h5>About me: ${user.description}</h5>
-                    <br/> 
+    <f:view>  
+        <ui:include src="/navBar.xhtml" />   
+        <h:body>
 
-                    <form action="updateD" method="post">  
-                        <input type="text" placeholder="Description" name="desc"/> 
-                        <input type="submit" value="Update" />  
-                    </form>
+            <div class="container">
+                <div class="row main">
+                    <div class="col-md-12">
+                        <h2>The profile page of: <h:outputLabel class="textLabel" style="color: darkgray;" value="${user.name}"/></h2>
+                    </div>
                 </div>
+
+                <div class="main-register main-center">
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <div class="col-md-6" align="left">
+                                <form  action="updateD" method="post">
+                                    <p> Name: <h:outputLabel class="textLabel" value="${user.name}"/></p>
+                                    <div class="input-group">
+                                        <input type="text" name="username"  class="form-control" placeholder="Enter new name"/>
+
+                                        <button type="submit" value="Update" class="btn btn-secondary" align="left">
+                                            Update
+                                        </button>
+                                    </div>
+                                </form>
+
+                                <form  action="updateD" method="post">
+                                    <p> About me: <h:outputLabel class="textLabel" value="${user.description}"/></p>
+                                    <div class="input-group">
+                                        <input type="text" name="desc"  class="form-control" placeholder="Enter new description"/>
+
+                                        <button type="submit" value="Update" class="btn btn-secondary" align="left">
+                                            Update
+                                        </button>
+                                    </div>
+                                </form>
+
+
+
+                            </div>
+
+                            <div class="col-md-6" align="center">
+
+                                <img src="${user.pic}" style="
+                                     max-width: 250px;
+                                     max-height: 250px;"/>
+                                <div class="col-md-8">
+                                    <form  action="updatePic" method="post">
+
+                                        <div class="input-group">
+                                            <input type="text" name="picture" class="form-control" placeholder="Add imagelink"/>
+                                            <button type="submit" value="Update" class="btn btn-secondary" align="left">
+                                                Update
+                                            </button>
+                                        </div>
+                                    </form> 
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <ui:repeat value="#{user.products}" var="product">
+                    <tr>
+                        <td>
+                            <h:outputLabel class="textLabel" value="#{product.name}"/>
+
+                        </td>
+                        <td>
+                            <h:outputLabel class="textLabel" value="#{product.shipsTo}"/>
+                        </td>
+                        <td>
+                            <h:outputLabel class="textLabel" value="#{product.startingPrice}"/>
+                        </td>
+                        <th>
+                            <form action="search" method="get">
+                                <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
+                                </button>   
+                            </form>
+
+                        </th>
+                    </tr>
+                </ui:repeat>
             </div>
-            <form action="updatePic" method="post">  
-                <input type="text" name="picture" placeholder="Link to picture"/> <br/>
-                <input type="submit" value="Update"/>  
-            </form>
-            <div class="row">
-                <div class="col">
-                    1 of 2
-                    <br/>
-                    <ui:repeat value="${user.products}" var="product">
-                        Product: <h:outputLabel class="textLabel" value="#{product.name}"/>
-                        <form action="search" method="get">
-                            <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
-                            </button>   
-                        </form>
-                    </ui:repeat>
-                </div>
-                <div class="col">
-                    2 of 2
-                    <br/>
-                    <ui:repeat value="${user.bids}" var="bids">
-                        Product: <h:outputLabel class="textLabel" value="#{bids.product.name}"/>
-                        Bid: <h:outputLabel class="textLabel" value="#{bids.amount}"/>
-                        <form action="search" method="get">
-                            <button type="submit" class="btn btn-primary " value="#{bids.id}" name="bids" >Go To!
-                            </button>   
-                        </form>
-                    </ui:repeat>
 
-                </div>
-            </div>
-
-        </f:view>
-    </h:body>
+        </h:body>
+    </f:view>
 </html>
