@@ -175,12 +175,11 @@ public class Controller extends HttpServlet {
             String imageURL = request.getParameter("imageURL");
             String date = request.getParameter("expirationDate");
             String isPublished = request.getParameter("isPublished");
-
+                        
+            
             String cat = request.getParameter("category");
-            Category category = Category.valueOf(cat);
-
             Product p
-                    = productFacade.createProduct(name, startingPrice, category, shipsTo,
+                    = productFacade.createProduct(name, startingPrice, cat, shipsTo,
                             description, imageURL, date, isPublished,
                             (AuctionUser) session.getAttribute("user"));
 

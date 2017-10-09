@@ -10,5 +10,5 @@ package Enums;
  * @author raugz
  */
 public enum Category {
-    FOOD, TRANSPORT, ENTERTAINMENT
+    Food, Toy, Clothes,Technology, Other
 }

@@ -71,25 +71,12 @@
                                     <input type="text" name="imageURL"  class="form-control" placeholder="Enter a image URL"/>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
-                                <label for="category" class="cols-sm-2 control-label">
-                                    Category:
-                                </label>
-                                <div class="cols-sm-10">
-                                    <div class="input-group"></div>
-                                    <input type="text" name="category"  class="form-control" placeholder="Enter a valid category"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="category" class="cols-sm-2 control-label">
-                                    Category:
-                                </label>
-                                <select>
-                                    <option value="volvo">Volvo</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="mercedes">Mercedes</option>
-                                    <option value="audi">Audi</option>
+                                <select name="category">
+                                    <ui:repeat value="#{productView.allCategories}" var="tempCategory">
+                                        <option>#{tempCategory.toString()}</option>
+                                    </ui:repeat>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -117,7 +104,7 @@
                                     Submit
                                 </button>
                             </div>
-                        
+
                         </form>
                     </div>
                 </div>

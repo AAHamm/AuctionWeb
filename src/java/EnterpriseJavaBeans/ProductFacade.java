@@ -64,7 +64,7 @@ public class ProductFacade extends AbstractFacade<Product> {
      * Creates a product and adds it to the database
      * Handles conversion from Strings to userful objects.
      */
-    public Product createProduct(String name, String startingPrice, Category cat, String shipsTo,
+    public Product createProduct(String name, String startingPrice, String cat, String shipsTo,
                                  String description, String imageURL, String date, String isPublished,
                                  AuctionUser seller){
         
