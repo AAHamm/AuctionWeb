@@ -209,8 +209,10 @@ public class Controller extends HttpServlet {
                 bidFacade.createBid(amount, product, (AuctionUser) session.getAttribute("user"));
                 
                 if(b != null){
+                    
                     productFacade.merge(product);
                     userFacade.merge((AuctionUser) session.getAttribute("user"));
+                    
                 }
                 else { // bid was not created
                     String error;
