@@ -54,15 +54,17 @@ public class Product implements Serializable, Comparable<Product> {
     private boolean isPublished;
     private Date expirationDate;
     private Boolean isExpired = false;
-    private Category category;
+    private String category;
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
+
+    
 
     public Boolean getIsExpired() {
         return isExpired;

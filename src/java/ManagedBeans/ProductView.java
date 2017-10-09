@@ -8,6 +8,8 @@ package ManagedBeans;
 import EnterpriseJavaBeans.ProductFacade;
 
 import Entities.Product;
+import Enums.Category;
+import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -37,6 +39,16 @@ public class ProductView {
      */
     public ProductView() {
         this.product = new Product();
+    }
+    
+    
+    public List<Category> getAllCategories(){
+     
+              
+         return Arrays.asList(Category.values());
+
+        
+     
     }
     
     public List<Product> getAllSorted(){
