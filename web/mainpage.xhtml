@@ -49,6 +49,30 @@
                     </tbody>
                 </table>
             </div>
+            
+            <!-- TODO set productView.setCategory here !-->
+            
+            <br/>
+            <ui:repeat value="#{productView.allSorted}" var="product">
+                <tr>
+                    <td>
+                        <h:outputLabel class="textLabel" value="#{product.name}"/>
+                    </td>
+                    <td>
+                        <h:outputLabel class="textLabel" value="#{product.shipsTo}"/>
+                    </td>
+                    <td>
+                        <h:outputLabel class="textLabel" value="#{product.startingPrice}"/>
+                    </td>
+                    <th>
+                        <form action="search" method="get">
+                            <button type="submit" class="btn btn-primary " value="#{product.id}" name="productID" >Go To!
+                            </button>   
+                        </form>
+
+                    </th>
+                </tr>
+            </ui:repeat>
         </f:view>
     </h:body>
 </html>

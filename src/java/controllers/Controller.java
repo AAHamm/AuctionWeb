@@ -121,6 +121,15 @@ public class Controller extends HttpServlet {
                 response.sendRedirect("listProducts");
             }*/
         }
+        
+        /*
+        if (userPath.equals("/selectCategory")) {
+            //TODO get attributes from request
+            String catString = "FOOD";
+            Category category = Category.valueOf(catString);
+            
+        }
+        */
     }
 
     /**

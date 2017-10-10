@@ -17,6 +17,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -58,6 +59,13 @@ public class ProductFacade extends AbstractFacade<Product> {
         List<Product> a = findAll();
         Collections.sort(a);
         return a;
+    }
+    
+    public List<Product> getAllCategory(Category cat) {
+        Query query = em.createQuery("SELECT p FROM Product p WHERE o.category = cat");
+        List<Product> products = query.getResultList();
+        
+        return products;
     }
     
     /**
