@@ -195,8 +195,13 @@ public class Controller extends HttpServlet {
             response.sendRedirect("/AuctionWeb");
         }//end registerProduct
 
-        //System.out.println(userPath);
+        //System.out.println(userPath);        
+
+        
+        
         if (userPath.equals("/makeBid")) {
+            
+            session.removeAttribute("bidCreationError");
 
             //only logged on users can make Bids
             if (session.getAttribute("user") == null) {
@@ -233,6 +238,8 @@ public class Controller extends HttpServlet {
                     response.sendRedirect("/AuctionWeb/faces/product.xhtml");
                 }
 
+            }else{
+                session.setAttribute("bidCreationError", "You need to bid higher than current bid");
             }
 
             response.sendRedirect("/AuctionWeb/faces/product.xhtml");
