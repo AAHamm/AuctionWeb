@@ -9,7 +9,9 @@ import EnterpriseJavaBeans.AbstractFacade;
 import Entities.AuctionUser;
 import Entities.Bid;
 import Entities.Product;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
@@ -69,7 +71,20 @@ public class BidFacade extends AbstractFacade<Bid> {
         
         
         if(!b.getProduct().getBids().contains(b)){
-        b.getProduct().getBids().add(b);
+            List<Bid> otherBids = new ArrayList<>();
+            if(!b.getBuyer().getBids().isEmpty()){
+                for(Bid bid : b.getBuyer().getBids()){
+                    if(bid.getProduct().equals(b.getProduct())){
+                        otherBids.add(bid);
+                    }
+                }
+            }
+            for(Bid bid : otherBids){
+                if(b.getAmount() > bid.getAmount()){
+                    b.getBuyer().getBids().remove(bid);
+                }
+            }
+            b.getProduct().getBids().add(b);
         }
         
         try{
