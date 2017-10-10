@@ -99,69 +99,14 @@ public class ProductFacade extends AbstractFacade<Product> {
         
     }
     
-    public String printProductNames(){
-        String out ="";
-        for(Product a : findAll()){
-           out += "Product: " + a.getName() +
-                   ", for: " + a.getStartingPrice() + "." + "<br/>" +a.getSeller().getName()  +"<br/>";
-        }
-        return out;
-    }
     
-    public String allProductInfo(){
-        String out = "";
-        return out;
-    }
-
-    public void addUserToProduct(Product p) {
-        AuctionUser u = findFirstUser();
-        if(!u.getProducts().contains(p))
-            p.setSeller(u);
-    }
-    
-    public AuctionUser findFirstUser() {
-        List a = em.createQuery(
-        "SELECT c FROM AuctionUser c").getResultList();
-        return (AuctionUser) a.get(0);
-    }
-    
-        
-    public String printProductName(int index){
-        String out = "";
-        List<Product> products= findAll();
-        if(products.size() > index){
-            out+=products.get(index).getName();
-        }
-        return out;
-    }
-    
-    public String printDescription(int index){
-        String out = "";
-        List<Product> products= findAll(); 
-        if(index < products.size()){
-            out += products.get(index).getDescription();
-        }
-        return out;
-    }
-    
-        public String printPrice(int index){
-        String out = "";
-        List<Product> products= findAll(); 
-        if(index < products.size()){
-            out += "";
-        }
-        return out;
-    }
-    public String printSeller(int index){
-        String out = "";
-        List<Product> products= findAll(); 
-        if(index < products.size()){
-            out += products.get(index).getSeller().getName();
-        }
-        return out;
-    }
-    
-        public List<Product> searchForProduct(String searchObject) {
+    /**
+     * Search function for Product based on search keyword provided by searchObject
+     * 
+     * @param searchObject
+     * @return 
+     */
+    public List<Product> searchForProduct(String searchObject) {
         System.out.println("itemname:: " + searchObject);
 
         List<Product> listOfAllProducts = findAll();
