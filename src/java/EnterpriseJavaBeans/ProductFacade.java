@@ -112,7 +112,7 @@ public class ProductFacade extends AbstractFacade<Product> {
                  
             if(!p.getSeller().getProducts().contains(p)){
                 p.getSeller().getProducts().add(p);
-                userFacade.merge(p.getSeller());
+                //userFacade.merge(p.getSeller());
             }
             
             create(p);
