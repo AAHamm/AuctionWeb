@@ -43,7 +43,8 @@ import javax.servlet.http.HttpSession;
             "/login",
             "/logout",
             "/updateD",
-            "/updatePic"})
+            "/updatePic",
+            "/getSeller"})
 public class Controller extends HttpServlet {
 
     @EJB
@@ -120,6 +121,14 @@ public class Controller extends HttpServlet {
                 session.setAttribute("searchList", searchResult);
                 response.sendRedirect("listProducts");
             }*/
+        }
+        
+        if(userPath.equals("/getSeller")){
+           String sellerID = request.getParameter("sellerID");
+           
+           session.setAttribute("seller", userFacade.find(Long.parseLong(sellerID)));
+           
+           response.sendRedirect("/AuctionWeb/faces/sellerpage.xhtml");
         }
     }
 

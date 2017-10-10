@@ -55,7 +55,9 @@
                                             <h5>More information about the product: </h5>
                                             <h:outputLabel class="textLabel" value="${selectedProduct.description}"/>
                                             Sold by:
+                                            <a href="getSeller?sellerID=${selectedProduct.seller.id}">
                                             <h:outputLabel class="textLabel" value="${selectedProduct.seller.name}"/>
+                                            </a>
                                         </div>
                                         <br/>
                                         <h:outputLabel class="textLabel" value="${selectedProduct.category}"/>
