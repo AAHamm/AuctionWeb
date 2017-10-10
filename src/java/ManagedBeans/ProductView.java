@@ -50,9 +50,11 @@ public class ProductView {
         this.product = new Product();
     }
    
+    /*
     public List<Product> getAllWithinCategory(){
         return productFacade.getAllCategory(category);
     }
+    */
     
     public List<Category> getAllCategories(){
      

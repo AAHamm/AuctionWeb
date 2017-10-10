@@ -43,7 +43,8 @@ import javax.servlet.http.HttpSession;
             "/login",
             "/logout",
             "/updateD",
-            "/updatePic"})
+            "/updatePic",
+            "/selectCategory"})
 public class Controller extends HttpServlet {
 
     @EJB
@@ -121,15 +122,6 @@ public class Controller extends HttpServlet {
                 response.sendRedirect("listProducts");
             }*/
         }
-        
-        /*
-        if (userPath.equals("/selectCategory")) {
-            //TODO get attributes from request
-            String catString = "FOOD";
-            Category category = Category.valueOf(catString);
-            
-        }
-        */
     }
 
     /**
@@ -281,6 +273,18 @@ public class Controller extends HttpServlet {
                 response.sendRedirect("/AuctionWeb");
                 //response.sendRedirect("/AuctionWeb/faces/registerproduct.xhtml");
             }
+        }
+        
+        if (userPath.equals("/selectCategory")) {
+            String cat = request.getParameter("category");
+            Category category = Category.valueOf(cat);
+            
+            //TODO flush these at some point
+            List<Product> prodList = productFacade.getAllCategory(category);
+            //session.removeAttribute("selectedCategoryProducts");
+            session.setAttribute("selectedCategoryProducts", prodList);
+            session.setAttribute("category", cat);
+            response.sendRedirect("/AuctionWeb/faces/mainpageCategory.xhtml");
         }
 
         if (userPath.equals("/updateD")) {

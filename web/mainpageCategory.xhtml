@@ -15,8 +15,7 @@
         <br/>
         <f:view>
             <div class="container">
-                <h2>Catalog:</h2>
-
+                <h2>${category}</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -26,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <ui:repeat value="#{productView.allSorted}" var="product">
+                        <ui:repeat value="${selectedCategoryProducts}" var="product">
                             <tr>
                                 <td>
                                     <h:outputLabel class="textLabel" value="#{product.name}"/>
@@ -56,13 +55,7 @@
                             <option>#{tempCategory.toString()}</option>
                         </ui:repeat>
                     </select>
-                    <div class="col-md text-center">
-                        <button type="submit" value="selectCategory" class="btn btn-success">
-                            Submit
-                        </button>
-                    </div>
                 </div>
-
             </form>
         </f:view>
     </h:body>

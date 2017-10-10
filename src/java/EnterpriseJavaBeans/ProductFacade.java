@@ -61,10 +61,16 @@ public class ProductFacade extends AbstractFacade<Product> {
         return a;
     }
     
+    /**
+     * 
+     * @param cat
+     * @return All products within the given category
+     */
     public List<Product> getAllCategory(Category cat) {
-        Query query = em.createQuery("SELECT p FROM Product p WHERE o.category = cat");
-        List<Product> products = query.getResultList();
-        
+        String in = cat.toString();
+        Query query = em.createQuery("SELECT p FROM Product p WHERE p.category = :in");
+        List<Product> products
+                = query.setParameter("in", in).getResultList();
         return products;
     }
     
