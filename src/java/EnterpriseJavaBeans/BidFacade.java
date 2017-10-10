@@ -66,7 +66,7 @@ public class BidFacade extends AbstractFacade<Bid> {
         //warning: slow for users with many bids!
         if(!b.getBuyer().getBids().contains(b)){
             b.getBuyer().getBids().add(b);
-                    
+             
         }
         
         
