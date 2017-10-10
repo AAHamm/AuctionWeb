@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,6 +30,8 @@ public class ProductFacade extends AbstractFacade<Product> {
     @PersistenceContext(unitName = "persistence unit")
     private EntityManager em;
     
+    @EJB
+    private UserFacade userFacade;
     
     public void merge(Product p){
         em.merge(p);
@@ -41,6 +44,9 @@ public class ProductFacade extends AbstractFacade<Product> {
         getEntityManager().persist(entity);
         if(!entity.getSeller().getProducts().contains(entity)){
             entity.getSeller().getProducts().add(entity);
+            
+            userFacade.merge(entity.getSeller());
+            
         }
 
     }
@@ -106,6 +112,7 @@ public class ProductFacade extends AbstractFacade<Product> {
                  
             if(!p.getSeller().getProducts().contains(p)){
                 p.getSeller().getProducts().add(p);
+                userFacade.merge(p.getSeller());
             }
             
             create(p);
