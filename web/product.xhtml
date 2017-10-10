@@ -35,7 +35,7 @@
 
                                 <div class="jumbotron" style="height: 100%; margin:auto">
 
-                                    <div class="row">
+                                        <div class="row">
                                         <div class="col-md-7">
                                             <h4>Prize of this product:
                                                 <h:outputLabel class="textLabel" value="${selectedProduct.startingPrice}"/>.</h4> 
@@ -52,15 +52,26 @@
                                         </div>
 
                                         <div class="col-md-4" align="left">
+                                            <div class ="row">
                                             <h5>More information about the product: </h5>
+                                            </div>
+                                            <div class="row">
+                                            Description:
                                             <h:outputLabel class="textLabel" value="${selectedProduct.description}"/>
+                                            </div>
+                                            <div class="row">
+                                            Category:
+                                            <h:outputLabel class="textLabel" value="${selectedProduct.category}"/>
+                                            </div>
+                                            <div class="row">
                                             Sold by:
                                             <a href="getSeller?sellerID=${selectedProduct.seller.id}">
                                             <h:outputLabel class="textLabel" value="${selectedProduct.seller.name}"/>
                                             </a>
+                                            </div>
                                         </div>
                                         <br/>
-                                        <h:outputLabel class="textLabel" value="${selectedProduct.category}"/>
+                                        
                                     </div>                           
                                 </div>
                             </div>                 
