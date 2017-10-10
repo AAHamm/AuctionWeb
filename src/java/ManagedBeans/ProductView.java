@@ -57,11 +57,8 @@ public class ProductView {
     */
     
     public List<Category> getAllCategories(){
-     
-              
-         return Arrays.asList(Category.values());
+return Arrays.asList(Category.values());
 
-        
      
     }
     
@@ -82,21 +79,4 @@ public class ProductView {
     public Product getProduct() {
         return product;
     }
-    public String getAllProducts(){
-        return productFacade.printProductNames();
-    }
-        
-    public String getProductName(){
-        return productFacade.printProductName(0);
-    }
-    public String getProductDescription(){
-        return productFacade.printDescription(0);
-    }
-    public String getProductPrice(){
-        return productFacade.printPrice(0);
-    }
-    public String getProductSeller(){
-        return productFacade.printSeller(0);
-    }
-
 }

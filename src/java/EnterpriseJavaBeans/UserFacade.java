@@ -41,14 +41,7 @@ public class UserFacade extends AbstractFacade<AuctionUser> {
 
     }
     
-    public String printUserNames(){
-    String out ="";
-    for(AuctionUser a : findAll()){
-           out += a.getName()+ "; ";
-       }
-       return out;
-    }
-    
+
     //creates a user and adds it to the database
     public AuctionUser createUser(String name, String password){
             AuctionUser u = new AuctionUser();

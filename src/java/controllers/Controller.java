@@ -45,6 +45,7 @@ import javax.servlet.http.HttpSession;
             "/updateD",
             "/updatePic",
             "/selectCategory"})
+            "/getSeller"})
 public class Controller extends HttpServlet {
 
     @EJB
@@ -122,6 +123,14 @@ public class Controller extends HttpServlet {
                 response.sendRedirect("listProducts");
             }*/
         }
+        
+        if(userPath.equals("/getSeller")){
+           String sellerID = request.getParameter("sellerID");
+           
+           session.setAttribute("seller", userFacade.find(Long.parseLong(sellerID)));
+           
+           response.sendRedirect("/AuctionWeb/faces/sellerpage.xhtml");
+        }
     }
 
     /**
@@ -187,8 +196,13 @@ public class Controller extends HttpServlet {
             response.sendRedirect("/AuctionWeb");
         }//end registerProduct
 
-        //System.out.println(userPath);
+        //System.out.println(userPath);        
+
+        
+        
         if (userPath.equals("/makeBid")) {
+            
+            session.removeAttribute("bidCreationError");
 
             //only logged on users can make Bids
             if (session.getAttribute("user") == null) {
@@ -225,6 +239,8 @@ public class Controller extends HttpServlet {
                     response.sendRedirect("/AuctionWeb/faces/product.xhtml");
                 }
 
+            }else{
+                session.setAttribute("bidCreationError", "You need to bid higher than current bid");
             }
 
             response.sendRedirect("/AuctionWeb/faces/product.xhtml");
