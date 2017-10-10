@@ -9,10 +9,14 @@ import EnterpriseJavaBeans.AbstractFacade;
 import Entities.AuctionUser;
 import Entities.Bid;
 import Entities.Product;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PessimisticLockException;
 
 /**
  *
@@ -33,11 +37,20 @@ public class BidFacade extends AbstractFacade<Bid> {
         super(Bid.class);
     }
     
+    /**
+     * Returns null if trying to write to product.startingPrice same time 
+     * as another process
+     * @param amount
+     * @param product
+     * @param user
+     * @return 
+     */
     public Bid createBid(double amount, Product product, AuctionUser user){
         if(product.getExpirationDate() != null){
         
             java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
             if(product.getExpirationDate().compareTo(date) < 0){
+                product.setIsExpired(true);
                 return null;
             }
         
@@ -53,14 +66,35 @@ public class BidFacade extends AbstractFacade<Bid> {
         //warning: slow for users with many bids!
         if(!b.getBuyer().getBids().contains(b)){
             b.getBuyer().getBids().add(b);
-                    
+             
         }
-            
+        
+        
         if(!b.getProduct().getBids().contains(b)){
-        b.getProduct().getBids().add(b);
+            List<Bid> otherBids = new ArrayList<>();
+            if(!b.getBuyer().getBids().isEmpty()){
+                for(Bid bid : b.getBuyer().getBids()){
+                    if(bid.getProduct().equals(b.getProduct())){
+                        otherBids.add(bid);
+                    }
+                }
+            }
+            for(Bid bid : otherBids){
+                if(b.getAmount() > bid.getAmount()){
+                    b.getBuyer().getBids().remove(bid);
+                }
+            }
+            b.getProduct().getBids().add(b);
         }
-                
-        product.setStartingPrice(amount);
+        
+        try{
+         //   em.lock(product, LockModeType.PESSIMISTIC_FORCE_INCREMENT);
+            product.setStartingPrice(amount);
+        }
+        catch(PessimisticLockException e){
+            return null;
+        }
+
         
         return b;
     }

@@ -18,7 +18,7 @@
         <h:body>
 
 
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <h2>Product page for: <h:outputLabel class="textLabel" value="${selectedProduct.name}"/></h2>
@@ -35,7 +35,7 @@
 
                                 <div class="jumbotron" style="height: 100%; margin:auto">
 
-                                    <div class="row">
+                                        <div class="row">
                                         <div class="col-md-7">
                                             <h4>Prize of this product:
                                                 <h:outputLabel class="textLabel" value="${selectedProduct.startingPrice}"/>.</h4> 
@@ -44,16 +44,34 @@
                                                 <input a:placeholder="" type="number" name="amount"/>
                                                 <input type="submit" class="btn btn-primary btn-success" value="Make bid"/>
                                             </form>
+                                            <h:outputLabel class="textLabel" value="${loginBidError}"/>
+                                            <h:outputLabel class="textLabel" value="${bidCreationError}"/>
+                                            <br/>
                                             Auction Ends at:
                                             <h:outputLabel class="textLabel" value="${selectedProduct.expirationDate}"/>
                                         </div>
 
                                         <div class="col-md-4" align="left">
+                                            <div class ="row">
                                             <h5>More information about the product: </h5>
+                                            </div>
+                                            <div class="row">
+                                            Description:
                                             <h:outputLabel class="textLabel" value="${selectedProduct.description}"/>
+                                            </div>
+                                            <div class="row">
+                                            Category:
+                                            <h:outputLabel class="textLabel" value="${selectedProduct.category}"/>
+                                            </div>
+                                            <div class="row">
                                             Sold by:
+                                            <a href="getSeller?sellerID=${selectedProduct.seller.id}">
                                             <h:outputLabel class="textLabel" value="${selectedProduct.seller.name}"/>
+                                            </a>
+                                            </div>
                                         </div>
+                                        <br/>
+                                        
                                     </div>                           
                                 </div>
                             </div>                 

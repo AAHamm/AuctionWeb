@@ -12,6 +12,9 @@
   -moz-box-sizing: border-box;
 }
 
+.modal-dialog{
+       margin-top: 150px;
+}
 
 .loginmodal-submit {
   border: 0px;

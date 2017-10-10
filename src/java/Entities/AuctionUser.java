@@ -74,6 +74,41 @@ public class AuctionUser implements Serializable {
     public List<Bid> getBids() {
         return bids;
     }
+    
+    /**
+     * Does not work, TODO fix
+     * @return The users bids that are still currently highest on product
+     */
+    public List<Bid> getRelevantBids() {
+        List<Bid> resultList = new ArrayList<Bid>();
+        //for(Bid b : bids){
+            //resultList.add(b);
+        //}
+        
+        List<Product> prodList = new ArrayList<>();
+        for (Bid b1 : bids) {
+            //if(!prodList.contains(b1.getProduct())){ // product not in list
+                //prodList.add(b1.getProduct());
+               /*
+                if(b1.equals(prodHighest)){
+                    resultList.add(b1);
+                    System.out.println(b1.getProduct() + " " + b1.getAmount());
+                */
+               // }
+            //}
+                /*
+            else{
+                if(b1.getAmount().equals(b1.getProduct().getStartingPrice())){ // current highest price
+                    // we good
+                }
+                else{
+                    resultList.remove(b1);
+                }
+            }
+        */
+        }
+        return resultList;
+    }
 
     public void setBids(List<Bid> bids) {
         this.bids = bids;

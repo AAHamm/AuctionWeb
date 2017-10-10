@@ -12,10 +12,12 @@ import EnterpriseJavaBeans.UserFacade;
 import Entities.AuctionUser;
 import Entities.Bid;
 import Entities.Product;
+import Enums.Category;
 import ManagedBeans.ProductView;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.Enumeration;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.SessionBean;
@@ -41,7 +43,9 @@ import javax.servlet.http.HttpSession;
             "/login",
             "/logout",
             "/updateD",
-            "/updatePic"})
+            "/updatePic",
+            "/selectCategory",
+            "/getSeller"})
 public class Controller extends HttpServlet {
 
     @EJB
@@ -119,6 +123,14 @@ public class Controller extends HttpServlet {
                 response.sendRedirect("listProducts");
             }*/
         }
+        
+        if(userPath.equals("/getSeller")){
+           String sellerID = request.getParameter("sellerID");
+           
+           session.setAttribute("seller", userFacade.find(Long.parseLong(sellerID)));
+           
+           response.sendRedirect("/AuctionWeb/faces/sellerpage.xhtml");
+        }
     }
 
     /**
@@ -173,22 +185,30 @@ public class Controller extends HttpServlet {
             String imageURL = request.getParameter("imageURL");
             String date = request.getParameter("expirationDate");
             String isPublished = request.getParameter("isPublished");
-
+                        
+            
+            String cat = request.getParameter("category");
             Product p
-                    = productFacade.createProduct(name, startingPrice, shipsTo,
+                    = productFacade.createProduct(name, startingPrice, cat, shipsTo,
                             description, imageURL, date, isPublished,
                             (AuctionUser) session.getAttribute("user"));
 
             response.sendRedirect("/AuctionWeb");
         }//end registerProduct
 
-        //System.out.println(userPath);
+        //System.out.println(userPath);        
+
+        
+        
         if (userPath.equals("/makeBid")) {
+            
+            session.removeAttribute("bidCreationError");
 
             //only logged on users can make Bids
             if (session.getAttribute("user") == null) {
-                response.sendError(401);
-                return;
+                String error = "You need to be logged in order to bid for items.";
+                session.setAttribute("loginBidError", error);
+                response.sendRedirect("/AuctionWeb/faces/product.xhtml");
             }
 
             double amount = Double.parseDouble(request.getParameter("amount"));
@@ -203,10 +223,24 @@ public class Controller extends HttpServlet {
                 bidFacade.createBid(amount, product, (AuctionUser) session.getAttribute("user"));
                 
                 if(b != null){
+                    
                     productFacade.merge(product);
                     userFacade.merge((AuctionUser) session.getAttribute("user"));
+                    
+                }
+                else { // bid was not created
+                    String error;
+                    if (product.getIsExpired()) {
+                        error = "The item has expired, bidding is disabled";
+                    } else {
+                        error = "Someting went wrong, please refresh page";
+                    }
+                    session.setAttribute("bidCreationError", error);
+                    response.sendRedirect("/AuctionWeb/faces/product.xhtml");
                 }
 
+            }else{
+                session.setAttribute("bidCreationError", "You need to bid higher than current bid");
             }
 
             response.sendRedirect("/AuctionWeb/faces/product.xhtml");
@@ -232,10 +266,11 @@ public class Controller extends HttpServlet {
                 
                 String welcome = "Hello " + u.getName();
 
+                flushSession(session);
                 session.setAttribute("user", u);
                 session.setAttribute("welcomeMessage", welcome);
-                session.removeAttribute("isNotLoggedInError");
-                session.removeAttribute("loginStatusMessage");
+                //session.removeAttribute("isNotLoggedInError");
+                //session.removeAttribute("loginStatusMessage");
 
                 try {
                     response.sendRedirect("/AuctionWeb");
@@ -254,6 +289,18 @@ public class Controller extends HttpServlet {
                 response.sendRedirect("/AuctionWeb");
                 //response.sendRedirect("/AuctionWeb/faces/registerproduct.xhtml");
             }
+        }
+        
+        if (userPath.equals("/selectCategory")) {
+            String cat = request.getParameter("category");
+            Category category = Category.valueOf(cat);
+            
+            //TODO flush these at some point
+            List<Product> prodList = productFacade.getAllCategory(category);
+            //session.removeAttribute("selectedCategoryProducts");
+            session.setAttribute("selectedCategoryProducts", prodList);
+            session.setAttribute("category", cat);
+            response.sendRedirect("/AuctionWeb/faces/mainpageCategory.xhtml");
         }
 
         if (userPath.equals("/updateD")) {
@@ -299,4 +346,12 @@ public class Controller extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void flushSession(HttpSession session){
+        Enumeration<String> allAttributes = session.getAttributeNames();
+        
+        while(allAttributes.hasMoreElements()){
+            session.removeAttribute(allAttributes.nextElement());
+        }
+    }
+    
 }

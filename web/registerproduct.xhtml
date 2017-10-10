@@ -72,7 +72,13 @@
                                 </div>
                             </div>
 
-                            
+                            <div class="form-group">
+                                <select name="category">
+                                    <ui:repeat value="#{productView.allCategories}" var="tempCategory">
+                                        <option>#{tempCategory.toString()}</option>
+                                    </ui:repeat>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="expiration" class="cols-sm-2 control-label">
                                     Auction ends at:
@@ -82,7 +88,7 @@
                                     <input type="date" name="expirationDate" class="form-control"/>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="expiration" class="cols-sm-2 control-label">
                                     Publish Product:
@@ -92,13 +98,13 @@
                                     <input type="checkbox" name="isPublished" class="form-control"/>
                                 </div>
                             </div>
-                                <h:outputLabel value ="${isNotLoggedInError}" style="color: red"/>
+                            <h:outputLabel value ="${isNotLoggedInError}" style="color: red"/>
                             <div class="col-md text-center">
                                 <button type="submit" value="registerProduct" class="btn btn-success">
                                     Submit
                                 </button>
                             </div>
-                        
+
                         </form>
                     </div>
                 </div>

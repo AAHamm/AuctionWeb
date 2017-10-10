@@ -39,10 +39,6 @@ public class UserView {
         return auctionUser;
     }
     
-    public String getAllUsers(){
-        return userFacade.printUserNames();
-    }
-    
     public int getNumberOfUsers(){
         return userFacade.findAll().size();
     }

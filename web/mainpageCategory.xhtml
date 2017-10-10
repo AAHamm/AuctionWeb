@@ -31,8 +31,7 @@
 
             </form>
             <div class="container">
-                <h2>Catalog:</h2>
-
+                <h2>${category}</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -42,7 +41,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <ui:repeat value="#{productView.allSorted}" var="product">
+                        <ui:repeat value="${selectedCategoryProducts}" var="product">
                             <tr>
                                 <td>
                                     <h:outputLabel class="textLabel" value="#{product.name}"/>

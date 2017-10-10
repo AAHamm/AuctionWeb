@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE html>
-<html    xmlns:h="http://xmlns.jcp.org/jsf/html"
+<html   xmlns="http://www.w3.org/1999/xhtml" 
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
          xmlns:f="http://xmlns.jcp.org/jsf/core"
          xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <head>
@@ -12,17 +13,17 @@
         <nav class="navbar navbar-default navbar-expand-lg navbar-light bg-light">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="mainpage.xhtml">Home</a>
+                    <h:link class="nav-link active" outcome="mainpage">Home</h:link>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="userPage.xhtml">Profile</a>
+                    <h:link class="nav-link active" outcome="userPage">Profile</h:link>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="registerproduct.xhtml">Register Product</a>
+                    <h:link class="nav-link active" outcome="registerproduct">Register Product</h:link>
                 </li>
             </ul>
 
@@ -35,7 +36,10 @@
                 </div>
                 <h:commandButton action="#{searchBean.searchForProduct()}"  class="btn btn-outline-success my-2 my-sm-0" value="Submit"/>
             </h:form>
-            <p class="navbar-text" style="margin-left: 30px;margin-right: 30px;height: 20px;"> <h:outputLabel class="textLabel" value="${welcomeMessage}"/> </p> 
+            <p class="navbar-text" style="margin-left: 30px;margin-right: 10px;height: 20px;"> <h:outputLabel class="textLabel" value="${welcomeMessage}"/> </p>
+            <form action ="logout" method="post">
+                <input type="submit" value="logout" style="margin-right: 10px;" class="btn btn-outline-success my-2 my-sm-0"/>
+            </form>
     </nav>
 </body>
 </html>
