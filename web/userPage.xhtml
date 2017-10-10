@@ -27,16 +27,7 @@
                         <div class="row">
 
                             <div class="col-md-6" align="left">
-                                <form  action="updateD" method="post">
-                                    <p> Name: <h:outputLabel class="textLabel" value="${user.name}"/></p>
-                                    <div class="input-group">
-                                        <input type="text" name="username"  class="form-control" placeholder="Enter new name"/>
-
-                                        <button type="submit" value="Update" class="btn btn-secondary" align="left">
-                                            Update
-                                        </button>
-                                    </div>
-                                </form>
+                                <p> Name: <h:outputLabel class="textLabel" value="${user.name}"/></p>
 
                                 <form  action="updateD" method="post">
                                     <p> About me: <h:outputLabel class="textLabel" value="${user.description}"/></p>
@@ -122,7 +113,7 @@
                                             <th>Name</th>
                                             <th>Ships to</th>
                                             <th>Price</th>
-                                            <th>Highest bider</th>
+                                            <th>Highest bidder</th>
                                         </tr>
                                     </thead>
                                     <tbody>
