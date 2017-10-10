@@ -44,6 +44,7 @@ import javax.servlet.http.HttpSession;
             "/logout",
             "/updateD",
             "/updatePic",
+            "/selectCategory"})
             "/getSeller"})
 public class Controller extends HttpServlet {
 
@@ -288,6 +289,18 @@ public class Controller extends HttpServlet {
                 response.sendRedirect("/AuctionWeb");
                 //response.sendRedirect("/AuctionWeb/faces/registerproduct.xhtml");
             }
+        }
+        
+        if (userPath.equals("/selectCategory")) {
+            String cat = request.getParameter("category");
+            Category category = Category.valueOf(cat);
+            
+            //TODO flush these at some point
+            List<Product> prodList = productFacade.getAllCategory(category);
+            //session.removeAttribute("selectedCategoryProducts");
+            session.setAttribute("selectedCategoryProducts", prodList);
+            session.setAttribute("category", cat);
+            response.sendRedirect("/AuctionWeb/faces/mainpageCategory.xhtml");
         }
 
         if (userPath.equals("/updateD")) {

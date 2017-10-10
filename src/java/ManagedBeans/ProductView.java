@@ -27,6 +27,15 @@ public class ProductView {
     @EJB
     private ProductFacade productFacade;
     private Product product;
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     private double bidVal = -1;
 
@@ -40,7 +49,12 @@ public class ProductView {
     public ProductView() {
         this.product = new Product();
     }
-    
+   
+    /*
+    public List<Product> getAllWithinCategory(){
+        return productFacade.getAllCategory(category);
+    }
+    */
     
     public List<Category> getAllCategories(){
 return Arrays.asList(Category.values());
