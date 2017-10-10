@@ -14,6 +14,22 @@
     <h:body>
         <br/>
         <f:view>
+            <form  action="selectCategory" method="post">
+                <div class="col-md text-center">
+                    <div class="form-group">
+                        <select name="category">
+                            <ui:repeat value="#{productView.allCategories}" var="tempCategory">
+                                <option>#{tempCategory.toString()}</option>
+                            </ui:repeat>
+                        </select>
+
+                        <button type="submit" value="selectCategory" class="btn btn-success">
+                            Filter by Category
+                        </button>
+                    </div>
+                </div>
+
+            </form>
             <div class="container">
                 <h2>Catalog:</h2>
 
@@ -49,21 +65,7 @@
                     </tbody>
                 </table>
             </div>
-            <form  action="selectCategory" method="post">
-                <div class="form-group">
-                    <select name="category">
-                        <ui:repeat value="#{productView.allCategories}" var="tempCategory">
-                            <option>#{tempCategory.toString()}</option>
-                        </ui:repeat>
-                    </select>
-                    <div class="col-md text-center">
-                        <button type="submit" value="selectCategory" class="btn btn-success">
-                            Submit
-                        </button>
-                    </div>
-                </div>
 
-            </form>
         </f:view>
     </h:body>
 </html>
