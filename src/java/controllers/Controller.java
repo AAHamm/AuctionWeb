@@ -44,7 +44,7 @@ import javax.servlet.http.HttpSession;
             "/logout",
             "/updateD",
             "/updatePic",
-            "/selectCategory"})
+            "/selectCategory",
             "/getSeller"})
 public class Controller extends HttpServlet {
 
