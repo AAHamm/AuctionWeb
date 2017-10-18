@@ -4,11 +4,18 @@
  * and open the template in the editor.
  */
 package JMS;
-
-/**
- *
- * @author raugz
- */
-public class ProductListener {
-    
-}
+import javax.jms.*;  
+public class ProductListener implements MessageListener {  
+  
+    /**
+     * TODO make this method accept product objects
+     * @param m 
+     */
+    public void onMessage(Message m) {  
+        try{  
+        TextMessage msg=(TextMessage)m;  
+      
+        System.out.println("following message is received:"+msg.getText());  
+        }catch(JMSException e){System.out.println(e);}  
+    }  
+} 
