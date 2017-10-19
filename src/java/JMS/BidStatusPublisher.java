@@ -34,7 +34,7 @@ public class BidStatusPublisher {
             TopicPublisher publisher = ses.createPublisher(t);
             TextMessage msg = ses.createTextMessage();
             //TODO pass object Product here
-            msg.setText("");
+            msg.setText(p.getName());
             publisher.publish(msg);
             System.out.println("Message successfully sent."); 
             con.close();

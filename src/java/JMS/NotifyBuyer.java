@@ -3,18 +3,22 @@ package JMS;
 import javax.jms.*;  
 import javax.naming.InitialContext;  
   
-public class NotifyBuyer {  
-    public static void main(String[] args) {  // probably put into method instead
+public class NotifyBuyer { 
+    /**
+     * should not be called anywhere now
+     */
+    /*
+    public void recieveMessage(){
         try {  
             //TODO make everything, dont use for now
             //1) Create and start connection  
             InitialContext ctx=new InitialContext();  
-            TopicConnectionFactory f=(TopicConnectionFactory)ctx.lookup("myTopicConnectionFactory");  
+            TopicConnectionFactory f=(TopicConnectionFactory)ctx.lookup("AuctionTopicConnectionFactory");  
             TopicConnection con=f.createTopicConnection();  
             con.start();  
             TopicSession ses=con.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);  
             //3) get the Topic object  
-            Topic t=(Topic)ctx.lookup("myTopic");  
+            Topic t=(Topic)ctx.lookup("AuctionTopic");  
             //4)create TopicSubscriber  
             TopicSubscriber receiver=ses.createSubscriber(t);  
               
@@ -29,7 +33,8 @@ public class NotifyBuyer {
             while(true){                  
                 Thread.sleep(1000);  
             }  
-        }catch(Exception e){System.out.println(e);}  
+        }catch(Exception e){System.out.println(e);}
     }  
+*/
   
 }
