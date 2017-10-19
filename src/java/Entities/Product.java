@@ -24,6 +24,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
@@ -31,6 +34,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
  * @author raugz
  */
 @Entity
+@XmlAccessorType( XmlAccessType.FIELD)
 public class Product implements Serializable, Comparable<Product> {
 
     private static final long serialVersionUID = 1L;
@@ -40,9 +44,9 @@ public class Product implements Serializable, Comparable<Product> {
     
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="SELLER_ID")
+    
     private AuctionUser seller;
     //private String seller;
-    
     private String name;
     private String description;
     private String imageURL;
@@ -50,6 +54,8 @@ public class Product implements Serializable, Comparable<Product> {
     private String shipsTo;
     private double startingPrice;
     @OneToMany(mappedBy="product", cascade = CascadeType.PERSIST)
+    
+    @XmlTransient
     private List<Bid> bids = new ArrayList<Bid>();
     private boolean isPublished;
     private Date expirationDate;
