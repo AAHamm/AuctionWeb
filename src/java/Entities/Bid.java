@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -23,6 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @XmlAccessorType( XmlAccessType.FIELD)
+@XmlRootElement
 public class Bid implements Serializable {
 
     private static final long serialVersionUID = 1L;

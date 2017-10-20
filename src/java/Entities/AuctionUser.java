@@ -23,6 +23,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 
@@ -32,6 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @XmlAccessorType( XmlAccessType.FIELD)
+@XmlRootElement
 public class AuctionUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -79,6 +81,7 @@ public class AuctionUser implements Serializable {
     public AuctionUser() {
     }
    
+    @XmlTransient
     public List<Bid> getBids() {
         return bids;
     }
@@ -128,6 +131,7 @@ public class AuctionUser implements Serializable {
         this.products = products;
     }
     
+    @XmlTransient
     public List<Product> getProducts() {
         return products;
     }

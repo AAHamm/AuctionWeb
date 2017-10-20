@@ -12,6 +12,8 @@ import Entities.Bid;
 import Entities.Product;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.jms.Message;
+import javax.jms.TextMessage;
 import javax.jws.Oneway;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -38,7 +40,7 @@ public class AuctionWebBidWS {
     }
     
     @WebMethod(operationName = "bidForAuction")
-    public String bidForAuction(Bid b){ 
+    public String bidForAuction(Bid b){
         return ejbRef.createWithRespone(b);
     }
     
