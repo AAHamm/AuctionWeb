@@ -6,6 +6,7 @@
 package JMS;
 
 import Entities.Product;
+import javax.jms.ObjectMessage;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jms.Topic;
@@ -28,16 +29,18 @@ public class BidStatusPublisher {
             TopicConnectionFactory f=(TopicConnectionFactory)ctx.lookup("AuctionTopicConnectionFactory");  
             TopicConnection con=f.createTopicConnection();  
             con.start();  
-            //2) create queue session  
-            TopicSession ses=con.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);    
+            
+            TopicSession ses = con.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);    
             Topic t=(Topic)ctx.lookup("AuctionTopic");  
             TopicPublisher publisher = ses.createPublisher(t);
-            TextMessage msg = ses.createTextMessage();
-            //TODO pass object Product here
-            msg.setText(p.getName());
+            
+            ObjectMessage msg = ses.createObjectMessage();
+            msg.setObject(p);
             publisher.publish(msg);
-            System.out.println("Message successfully sent."); 
+            
+            System.out.println("Topic published: "+ msg.getObject()); 
             con.close();
         }catch(Exception e){System.out.println(e);}  
     }
+    
 }
