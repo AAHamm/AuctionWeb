@@ -21,10 +21,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
@@ -32,8 +28,6 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author raugz
  */
 @Entity
-@XmlAccessorType( XmlAccessType.FIELD)
-@XmlRootElement
 public class AuctionUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,7 +35,6 @@ public class AuctionUser implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String name;
     private String password;
     private String description;
@@ -70,18 +63,14 @@ public class AuctionUser implements Serializable {
       joinColumns={ @JoinColumn(name="ID", referencedColumnName="ID") },
       inverseJoinColumns={ @JoinColumn(name="PROD_ID", referencedColumnName="ID", unique=false) }
     )*/
-    
     private List<Product> products = new ArrayList();
     
-
     @OneToMany(mappedBy="buyer", cascade = CascadeType.PERSIST)
-    @XmlTransient
     private List<Bid> bids = new ArrayList();
 
     public AuctionUser() {
     }
-   
-    @XmlTransient
+
     public List<Bid> getBids() {
         return bids;
     }
@@ -131,7 +120,6 @@ public class AuctionUser implements Serializable {
         this.products = products;
     }
     
-    @XmlTransient
     public List<Product> getProducts() {
         return products;
     }
