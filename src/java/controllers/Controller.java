@@ -15,11 +15,14 @@ import Entities.Product;
 import Enums.Category;
 import JMS.BidStatusPublisher;
 import ManagedBeans.ProductView;
+import TimerTools.Expiration;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.ejb.EJB;
 import javax.ejb.SessionBean;
 import javax.faces.bean.ManagedProperty;
@@ -112,8 +115,6 @@ public class Controller extends HttpServlet {
             //productView.setProduct(productFacade.find(Long.parseLong(productID)));
             response.sendRedirect("/AuctionWeb/faces/product.xhtml");
             
-            BidStatusPublisher pub = new BidStatusPublisher();
-            pub.publish(productFacade.find(Long.parseLong(productID)));
         }
         
         if(userPath.equals("/getSeller")){
@@ -177,14 +178,18 @@ public class Controller extends HttpServlet {
             String imageURL = request.getParameter("imageURL");
             String date = request.getParameter("expirationDate");
             String isPublished = request.getParameter("isPublished");
-                        
             
             String cat = request.getParameter("category");
             Product p
                     = productFacade.createProduct(name, startingPrice, cat, shipsTo,
                             description, imageURL, date, isPublished,
                             (AuctionUser) session.getAttribute("user"));
-
+        /*
+        BidStatusPublisher pub = new BidStatusPublisher();
+        System.out.println("******************" + name);
+        pub.publish(productFacade.find(product));
+            */
+            createExpireTimer(p);
             response.sendRedirect("/AuctionWeb");
         }//end registerProduct
 
@@ -343,6 +348,19 @@ public class Controller extends HttpServlet {
         
         while(allAttributes.hasMoreElements()){
             session.removeAttribute(allAttributes.nextElement());
+        }
+    }
+
+    private void createExpireTimer(Product p) {
+        TimerTask exp = new Expiration(p);      //publishes product on topic
+        Timer timer = new Timer();
+        java.util.Date currDate = new java.util.Date();
+        long timeDelta = p.getExpirationDate().getTime() - currDate.getTime();
+        if(timeDelta > 0){
+            timer.schedule(exp, timeDelta);
+        }
+        else{
+            exp.run();
         }
     }
     
