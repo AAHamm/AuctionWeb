@@ -12,6 +12,7 @@ src/conf/persistence.xml
 src/conf/persistence.xml
 src/conf/persistence.xml
 web/navBar.xhtml
-src/conf/persistence.xml
-nbproject/project.properties
-src/conf/persistence.xml
+
+*.gif
+*.png
+*.jpg
