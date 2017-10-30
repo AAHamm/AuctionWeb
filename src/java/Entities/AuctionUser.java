@@ -71,6 +71,7 @@ public class AuctionUser implements Serializable {
       inverseJoinColumns={ @JoinColumn(name="PROD_ID", referencedColumnName="ID", unique=false) }
     )*/
     
+     @XmlTransient
     private List<Product> products = new ArrayList();
     
 
