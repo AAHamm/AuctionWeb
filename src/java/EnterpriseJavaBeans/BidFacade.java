@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.jms.Message;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
@@ -98,6 +99,16 @@ public class BidFacade extends AbstractFacade<Bid> {
 
         
         return b;
+    }
+
+    public String createWithRespone(Bid b) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(b.getProduct().getStartingPrice() < b.getAmount()){
+            create(b);
+            return "Bid Successfully created";    
+        }
+        return "Bid too low";
+        
     }
 
     
