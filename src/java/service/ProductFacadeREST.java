@@ -35,6 +35,7 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
         super(Product.class);
     }
 
+    /*
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -54,6 +55,8 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
     public void remove(@PathParam("id") Long id) {
         super.remove(super.find(id));
     }
+    
+    */
 
     @GET
     @Path("{id}")
@@ -68,6 +71,8 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
     public List<Product> findAll() {
         return super.findAll();
     }
+    
+    /*
 
     @GET
     @Path("{from}/{to}")
@@ -82,6 +87,7 @@ public class ProductFacadeREST extends AbstractFacade<Product> {
     public String countREST() {
         return String.valueOf(super.count());
     }
+    */
 
     @Override
     protected EntityManager getEntityManager() {
