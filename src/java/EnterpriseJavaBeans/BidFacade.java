@@ -21,7 +21,7 @@ import javax.persistence.PessimisticLockException;
 
 /**
  *
- * @author Åsmund
+ * @author Ã…smund
  */
 @Stateless
 public class BidFacade extends AbstractFacade<Bid> {
@@ -91,6 +91,7 @@ public class BidFacade extends AbstractFacade<Bid> {
         try{
          //   em.lock(product, LockModeType.PESSIMISTIC_FORCE_INCREMENT);
             product.setStartingPrice(amount);
+            product.setHighestBidder(user);
         }
         catch(PessimisticLockException e){
             return null;

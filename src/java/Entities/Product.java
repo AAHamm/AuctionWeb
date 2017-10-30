@@ -44,7 +44,7 @@ public class Product implements Serializable, Comparable<Product> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;  
     
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="SELLER_ID")
     
     private AuctionUser seller;
@@ -63,6 +63,16 @@ public class Product implements Serializable, Comparable<Product> {
     private Date expirationDate;
     private Boolean isExpired = false;
     private String category;
+    @OneToOne
+    private AuctionUser highestBidder;
+
+    public AuctionUser getHighestBidder() {
+        return highestBidder;
+    }
+
+    public void setHighestBidder(AuctionUser highestBidder) {
+        this.highestBidder = highestBidder;
+    }
 
     public String getCategory() {
         return category;

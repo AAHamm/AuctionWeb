@@ -13,6 +13,7 @@ import Entities.AuctionUser;
 import Entities.Bid;
 import Entities.Product;
 import Enums.Category;
+import JMS.BidStatusPublisher;
 import ManagedBeans.ProductView;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -110,18 +111,9 @@ public class Controller extends HttpServlet {
 
             //productView.setProduct(productFacade.find(Long.parseLong(productID)));
             response.sendRedirect("/AuctionWeb/faces/product.xhtml");
-
-            /* List<Product> searchResult;
             
-            String itemName = request.getParameter("searchVal");
-        
-            if( productFacade.searchForProduct(itemName).isEmpty()){
-                response.sendRedirect("/AuctionWeb");
-            } else {
-                searchResult = productFacade.searchForProduct(itemName);
-                session.setAttribute("searchList", searchResult);
-                response.sendRedirect("listProducts");
-            }*/
+            BidStatusPublisher pub = new BidStatusPublisher();
+            pub.publish(productFacade.find(Long.parseLong(productID)));
         }
         
         if(userPath.equals("/getSeller")){
