@@ -13,12 +13,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Åsmund
  */
 @Entity
+@XmlAccessorType( XmlAccessType.FIELD)
+@XmlRootElement
 public class Bid implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,10 +34,12 @@ public class Bid implements Serializable {
     
     @ManyToOne
     @JoinColumn(name="BUYER_ID")
+
     private AuctionUser buyer;
     
     @ManyToOne
     @JoinColumn(name="PRODUCT_ID")
+
     private Product product;
     
     private Double amount;
