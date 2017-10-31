@@ -13,16 +13,23 @@ import Entities.AuctionUser;
 import Entities.Bid;
 import Entities.Product;
 import Enums.Category;
+import JMS.BidStatusPublisher;
 import ManagedBeans.ProductView;
+import TimerTools.Expiration;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.ejb.EJB;
 import javax.ejb.SessionBean;
 import javax.faces.bean.ManagedProperty;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
+import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +53,9 @@ import javax.servlet.http.HttpSession;
             "/updatePic",
             "/selectCategory",
             "/getSeller"})
+@ServletSecurity
+@HttpConstraint(transportGuarantee = TransportGuarantee.CONFIDENTIAL,
+        rolesAllowed = {"User"})
 public class Controller extends HttpServlet {
 
     @EJB
@@ -110,18 +120,7 @@ public class Controller extends HttpServlet {
 
             //productView.setProduct(productFacade.find(Long.parseLong(productID)));
             response.sendRedirect("/AuctionWeb/faces/product.xhtml");
-
-            /* List<Product> searchResult;
             
-            String itemName = request.getParameter("searchVal");
-        
-            if( productFacade.searchForProduct(itemName).isEmpty()){
-                response.sendRedirect("/AuctionWeb");
-            } else {
-                searchResult = productFacade.searchForProduct(itemName);
-                session.setAttribute("searchList", searchResult);
-                response.sendRedirect("listProducts");
-            }*/
         }
         
         if(userPath.equals("/getSeller")){
@@ -185,7 +184,6 @@ public class Controller extends HttpServlet {
             String imageURL = request.getParameter("imageURL");
             String date = request.getParameter("expirationDate");
             String isPublished = request.getParameter("isPublished");
-                        
             
             String cat = request.getParameter("category");
             Product p
@@ -193,6 +191,7 @@ public class Controller extends HttpServlet {
                             description, imageURL, date, isPublished,
                             (AuctionUser) session.getAttribute("user"));
 
+            createExpireTimer(p);
             response.sendRedirect("/AuctionWeb");
         }//end registerProduct
 
@@ -351,6 +350,19 @@ public class Controller extends HttpServlet {
         
         while(allAttributes.hasMoreElements()){
             session.removeAttribute(allAttributes.nextElement());
+        }
+    }
+
+    private void createExpireTimer(Product p) {
+        TimerTask exp = new Expiration(p);      //publishes product on topic
+        Timer timer = new Timer();
+        java.util.Date currDate = new java.util.Date();
+        long timeDelta = p.getExpirationDate().getTime() - currDate.getTime();
+        if(timeDelta > 0){
+            timer.schedule(exp, timeDelta);
+        }
+        else{
+            exp.run();
         }
     }
     
