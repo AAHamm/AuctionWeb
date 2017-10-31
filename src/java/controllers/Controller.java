@@ -27,6 +27,9 @@ import javax.ejb.EJB;
 import javax.ejb.SessionBean;
 import javax.faces.bean.ManagedProperty;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
+import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +53,9 @@ import javax.servlet.http.HttpSession;
             "/updatePic",
             "/selectCategory",
             "/getSeller"})
+@ServletSecurity
+@HttpConstraint(transportGuarantee = TransportGuarantee.CONFIDENTIAL,
+        rolesAllowed = {"User"})
 public class Controller extends HttpServlet {
 
     @EJB
@@ -184,11 +190,7 @@ public class Controller extends HttpServlet {
                     = productFacade.createProduct(name, startingPrice, cat, shipsTo,
                             description, imageURL, date, isPublished,
                             (AuctionUser) session.getAttribute("user"));
-        /*
-        BidStatusPublisher pub = new BidStatusPublisher();
-        System.out.println("******************" + name);
-        pub.publish(productFacade.find(product));
-            */
+
             createExpireTimer(p);
             response.sendRedirect("/AuctionWeb");
         }//end registerProduct
