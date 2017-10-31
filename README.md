@@ -5,3 +5,6 @@ If the URL is not on the format of /AuctionWeb/faces/* you might need to change 
 
 Link to email client:
 https://github.com/NikolaiGrieg/AuctionWebEmailClient
+
+Link to REST and SOAP clients:
+
