@@ -7,4 +7,5 @@ Link to email client:
 https://github.com/NikolaiGrieg/AuctionWebEmailClient
 
 Link to REST and SOAP clients:
+https://github.com/AAHamm/AuctionWebClients/tree/master
 
